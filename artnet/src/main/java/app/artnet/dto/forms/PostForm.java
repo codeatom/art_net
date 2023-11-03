@@ -28,8 +28,6 @@ public class PostForm {
 
     private List<String> likeArray = new ArrayList<>();
 
-    private AppUser appUser;
-
     private final List<Comment> comments = new ArrayList<>();
 
 

@@ -40,10 +40,9 @@ public class Post {
     public Post() {
     }
 
-    public Post(String description, String postImgURL, AppUser appUser) {
+    public Post(String description, String postImgURL) {
         this.description = description;
         this.postImgURL = postImgURL;
-        this.appUser = appUser;
     }
 
     public void addComment(Comment comment) {
