@@ -1,3 +1,26 @@
-.middle-panel-div{
+.post-header {
+    display: flex;
+}
 
+.post-avatar-padding {
+    margin-left: 10px
+}
+
+.like-and-comment {
+    display: flex;
+    height: 35px;
+    padding-top: 10px;
+    padding-bottom: 50px;
+    padding-left: 60px;
+}
+
+.like-symbol {
+    height: 30px;
+    margin-left: 10px;
+    cursor: pointer;
+} 
+
+.comment-symbol {
+    width: 30px;
+    margin-left: 50px;
 }
