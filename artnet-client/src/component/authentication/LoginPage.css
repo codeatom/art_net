@@ -1,0 +1,38 @@
+ .auth-div{
+    margin-top: 100px;
+    margin-left: 500px;
+    width: 800px;
+    background-color: rgb(204, 225, 225);
+ }
+ 
+ .user-data{
+     margin-bottom: 20px;
+ }
+ 
+ .text-input{
+     border-radius: 10px;
+     width: 300px;
+ }
+ 
+ .auth-button{
+     width: 300px;
+     margin-top: 10px;
+     border-radius: 10px;
+ }
+ 
+ .info-div{
+     margin-top: 20px;
+ }
+ 
+ .login-header{
+     margin-bottom: 30px;
+     font-size: 30px;
+ }
+ 
+
+
+
+
+
+
+
