@@ -2,6 +2,26 @@
   text-align: center;
 }
 
+.avatar {
+  vertical-align: middle;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.user-name {
+  font-weight: bold;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.txt:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .h-line-left {
   border-bottom: 1px solid #CDD0D4;
 }

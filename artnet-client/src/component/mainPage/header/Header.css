@@ -1,8 +1,20 @@
-.header-div {
-  background-color: white
+.header-logo {
+  width: 80px;
+  height: 50px;
 }
 
-.header-logo {
-  width: 60px;
-  height: 40px;
+.header-user-data {
+  display: flex;
+  margin-top: 5px;
+  margin-left: 150px;
+}
+
+.avatar-tweak {
+  width: 35px;
+  height: 35px;
+}
+
+.header-profile-name {
+  margin-top: 15px;
+  margin-left: 5px;
 }
