@@ -1,3 +1,38 @@
-.left-panel-container{
-    
+.left-panel-paper {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #CDD0D4;
+}
+
+.left-panel-post-header {
+    display: flex;
+}
+
+.left-panel-avatar-padding {
+    margin-top: 10px;
+    width: 35px;
+    height: 35px;
+}
+
+.left-panel-image {
+    width: 90px;
+    border-radius: 10px;
+}
+
+.left-panel-like-div {
+    display: flex;
+    height: 35px;
+    padding-top: 10px;
+}
+
+.left-panel-like-symbol {
+    height: 25px;
+    margin-left: 10px;
+    margin-bottom: 40px;
+}
+
+.left-panel-like-count {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    font-size: 14px;
 }

@@ -4,10 +4,15 @@ import { configureStore } from '@reduxjs/toolkit';
 const UPDATE_USER_IMG = 'UPDATE_USER_IMG';
 const UPDATE_USER_NAME = 'UPDATE_USER_NAME';
 const UPDATE_USER_POST_ARRAY = 'UPDATE_USER_POST_ARRAY';
+const UPDATE_ALL_POST_ARRAY = 'UPDATE_ALL_POST_ARRAY';
 
 
-const postReducer = (state = { userPostArray: [] }, action) => {
+const postReducer = (state = { allPostArray: [], userPostArray: [] }, action) => {
     switch (action.type) {
+        case UPDATE_ALL_POST_ARRAY: return {
+            ...state,
+            allPostArray: action.allPostList
+        };
         case UPDATE_USER_POST_ARRAY: return {
             ...state,
             userPostArray: action.userPostList
