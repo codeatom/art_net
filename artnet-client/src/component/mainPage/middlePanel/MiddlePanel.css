@@ -24,3 +24,25 @@
     width: 30px;
     margin-left: 50px;
 }
+
+.post-image {
+    width: 500px;
+    border-radius: 10px;
+    margin-left: 20px;
+    margin-right: 10px;
+}
+
+.like-and-comment-count {
+    margin-top: 5px;
+    margin-left: 5px;
+    font-size: 14px;
+}
+
+.post-description {
+    margin-bottom: 20px;
+}
+
+
+
+
+

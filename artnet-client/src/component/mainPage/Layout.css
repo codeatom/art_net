@@ -3,13 +3,16 @@
 }
 
 .left-panel{
-    height: 850px;
+    overflow-y: scroll;
+    height: 1000px;
 }
 
 .middle-side{
-    height: 850px;
+    overflow-y: scroll;
+    height: 1000px;
 }
 
 .right-panel{
-    height: 850px;
+    overflow-y: scroll;
+    height: 1000px;
 }
