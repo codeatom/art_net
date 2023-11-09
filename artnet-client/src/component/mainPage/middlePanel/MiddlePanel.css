@@ -44,5 +44,28 @@
 
 
 
+/* Comment */
 
+.comment-section {
+    border-bottom: 1px solid #CDD0D4;
+}
 
+.all-comment {
+    margin-left: 80px;
+    border-bottom: 1px solid #CDD0D4;
+}
+
+.comment {
+    display: flex;
+}
+
+.comment-date {
+    margin-top: 15px;
+    margin-left: 20px;
+    font-size: 12px;
+}
+
+.comment-text {
+    width: 300px;
+    margin-bottom: 20px;
+}

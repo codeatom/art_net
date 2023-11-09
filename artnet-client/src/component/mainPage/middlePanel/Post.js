@@ -1,6 +1,7 @@
 import avatar from '../../../images/avatar.png';
 import likebutton from '../../../images/likebutton.png';
 import textIcon from '../../../images/text.png';
+import Comment from './Comment';
 
 
 const Post = (props) => {
@@ -48,6 +49,11 @@ const Post = (props) => {
                     {props.postItem.comments.length}
                 </div>
             </div>
+
+
+            {/*Comments*/}
+            <Comment
+                item={props.postItem} />
         </div>
     );
 }
