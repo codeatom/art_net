@@ -7,6 +7,7 @@ import Footer from './footer/Footer'
 import LeftPanel from './leftPanel/LeftPanel';
 import RightPanel from './rightPanel/RightPanel';
 import MiddlePanel from './middlePanel/MiddlePanel';
+import UserService from '../../services/UserService';
 import PostService from '../../services/PostService';
 import './Layout.css';
 
@@ -16,6 +17,7 @@ const Layout = () => {
     const toggleModal = useSelector((state) => state.parameter.toggleModal);
     const [image, setImage] = useState(null);
     const [uploadImage, setUploadImage] = useState(null);
+    const [isProfileImg, setIsProfileImg] = useState(false);
     const [postDescription, setPostDescription] = useState("");
     const [uploadProgress, setUploadProgress] = useState(0);
     const TOGGLE_MODAL = 'TOGGLE_MODAL';
@@ -38,6 +40,10 @@ const Layout = () => {
 
         let storageRef = ref(storage, `post-images/${uploadImage.name + v4()}`);
 
+        if (isProfileImg) {
+            storageRef = ref(storage, `profile-images/${uploadImage.name + v4()}`);
+        }
+
         const uploadTask = uploadBytesResumable(storageRef, image);
         const user = JSON.parse(localStorage.getItem("user"));
 
@@ -48,14 +54,28 @@ const Layout = () => {
             (error) => { },
             () => {
                 getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-                    let postData = {
-                        "description": postDescription,
-                        "postImgURL": url,
-                        "userId": user.userId
+                    if (isProfileImg == false) {
+                        let postData = {
+                            "description": postDescription,
+                            "postImgURL": url,
+                            "userId": user.userId
+                        }
+                        PostService.createPost(postData).then(response => {
+                            closeDialogBox();
+                        });
+                    } else if (isProfileImg == true) {
+                        let userData = {
+                            "userId": user.userId,
+                            "userName": user.userName,
+                            "firstName": user.firstName,
+                            "lastName": user.lastName,
+                            "userEmail": user.userEmail,
+                            "userImage": url
+                        }
+                        UserService.updateUser(userData).then(() => {
+                            closeDialogBox();
+                        });
                     }
-                    PostService.createPost(postData).then(response => {
-                        closeDialogBox();
-                    });
                 });
             }
         );
@@ -76,7 +96,12 @@ const Layout = () => {
     return (
         <div className="container mainpage-container">
             <div className="row">  {/* a bootstrap row */}
-                <Header />
+                <Header
+                    uploadImage={uploadImage}
+                    setUploadImage={setUploadImage}
+                    setIsProfileImg={setIsProfileImg}
+                    uploadToFirebase={uploadToFirebase}
+                    uploadProgress={uploadProgress} />
             </div>
 
             <div className="row">{/* a bootstrap row */}
@@ -92,6 +117,7 @@ const Layout = () => {
                     <RightPanel
                         uploadImage={uploadImage}
                         setUploadImage={setUploadImage}
+                        setIsProfileImg={setIsProfileImg}
                         uploadToFirebase={uploadToFirebase}
                         handlePostDescription={handlePostDescription}
                         uploadProgress={uploadProgress} />
