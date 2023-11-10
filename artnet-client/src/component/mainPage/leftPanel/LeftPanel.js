@@ -10,6 +10,7 @@ const LeftSide = () => {
     const dispatch = useDispatch();
     const allPostArray = useSelector((state) => state.post.allPostArray);
     const UPDATE_ALL_POST_ARRAY = 'UPDATE_ALL_POST_ARRAY';
+    const UPDATE_USER_POST_ARRAY = 'UPDATE_USER_POST_ARRAY';
     const UPDATE_SINGLE_POST_ARRAY = 'UPDATE_SINGLE_POST_ARRAY';
     const IS_POST_DETAIL = 'IS_POST_DETAIL';
 
@@ -23,6 +24,12 @@ const LeftSide = () => {
         });
     }
 
+    const getAllByUserId = (userId) => {
+        const post = allPostArray.filter((item) => item.user.userId === userId)
+        undateUserPostArray(post);
+        setIsPostDetail(false);
+    }
+
     const getPostByPostId = (postId) => {
         const post = allPostArray.filter((item) => item.postId === postId)
         undateSinglePostArray(post);
@@ -33,6 +40,13 @@ const LeftSide = () => {
         dispatch({
             type: UPDATE_ALL_POST_ARRAY,
             allPostList: post
+        });
+    };
+
+    const undateUserPostArray = (post) => {
+        dispatch({
+            type: UPDATE_USER_POST_ARRAY,
+            userPostList: post
         });
     };
 
@@ -69,7 +83,7 @@ const LeftSide = () => {
                                     <img className='avatar left-panel-avatar-padding' src={handleUserImg(item.user.userImage)} />
                                 </div>
                                 <div className='user-name txt'>
-                                    <div>{item.user.userName}</div>
+                                    <div onClick={() => getAllByUserId(item.user.userId)}>{item.user.userName}</div>
                                 </div>
                                 <div className='post-date'>
                                     <div>{item.postDate}</div>
