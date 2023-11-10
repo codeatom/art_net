@@ -10,6 +10,8 @@ const LeftSide = () => {
     const dispatch = useDispatch();
     const allPostArray = useSelector((state) => state.post.allPostArray);
     const UPDATE_ALL_POST_ARRAY = 'UPDATE_ALL_POST_ARRAY';
+    const UPDATE_SINGLE_POST_ARRAY = 'UPDATE_SINGLE_POST_ARRAY';
+    const IS_POST_DETAIL = 'IS_POST_DETAIL';
 
     useEffect(() => {
         getAllPost();
@@ -21,10 +23,30 @@ const LeftSide = () => {
         });
     }
 
+    const getPostByPostId = (postId) => {
+        const post = allPostArray.filter((item) => item.postId === postId)
+        undateSinglePostArray(post);
+        setIsPostDetail(true);
+    }
+
     const undateAllPostArray = (post) => {
         dispatch({
             type: UPDATE_ALL_POST_ARRAY,
             allPostList: post
+        });
+    };
+
+    const undateSinglePostArray = (post) => {
+        dispatch({
+            type: UPDATE_SINGLE_POST_ARRAY,
+            singlePostList: post
+        });
+    };
+
+    const setIsPostDetail = (postDetail) => {
+        dispatch({
+            type: IS_POST_DETAIL,
+            isPostDetail: postDetail
         });
     };
 
@@ -54,7 +76,7 @@ const LeftSide = () => {
                                 </div>
                             </div>
                             <div >
-                                <img src={item.postImgURL} className='left-panel-image' />
+                                <img src={item.postImgURL} onClick={() => getPostByPostId(item.postId)} className='left-panel-image' />
                             </div>
 
                             <div className='left-panel-like-div'>

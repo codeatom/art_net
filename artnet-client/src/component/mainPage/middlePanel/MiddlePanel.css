@@ -69,3 +69,37 @@
     width: 300px;
     margin-bottom: 20px;
 }
+
+
+
+/* PostDetail */
+
+.back-btn-div {
+    display: flex;
+    position: absolute;
+    background-color: #f8f9fb;
+    width: 634px;
+    height: 50px;
+}
+
+.back-btn-icon {
+    width: 70px;
+    height: 40px;
+}
+
+.post-detail-avatar-tweak {
+    margin-top: 70px;
+    margin-left: 10px;
+}
+
+.user-name-tweak {
+    margin-top: 75px;
+}
+
+.post-date-tweak {
+    margin-top: 78px;
+}
+
+.post-description {
+    margin-bottom: 10px;
+}

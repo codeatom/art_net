@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import avatar from '../../../images/avatar.png';
 import likebutton from '../../../images/likebutton.png';
 import textIcon from '../../../images/text.png';
@@ -5,12 +7,36 @@ import Comment from './Comment';
 
 
 const Post = (props) => {
+    const dispatch = useDispatch();
+    const allPostArray = useSelector((state) => state.post.allPostArray);
+    const UPDATE_SINGLE_POST_ARRAY = 'UPDATE_SINGLE_POST_ARRAY';
+    const IS_POST_DETAIL = 'IS_POST_DETAIL';
 
     const handleUserImg = (userImage) => {
         if (userImage === "" || userImage === undefined) {
             return avatar;
         }
         return userImage;
+    }
+
+    const undateSinglePostArray = (post) => {
+        dispatch({
+            type: UPDATE_SINGLE_POST_ARRAY,
+            singlePostList: post
+        });
+    };
+
+    const setIsPostDetail = (postDetail) => {
+        dispatch({
+            type: IS_POST_DETAIL,
+            isPostDetail: postDetail
+        });
+    };
+
+    const getPostByPostId = (postId) => {
+        const post = allPostArray.filter((item) => item.postId === postId)
+        undateSinglePostArray(post);
+        setIsPostDetail(true);
     }
 
 
@@ -32,7 +58,7 @@ const Post = (props) => {
                     {props.postItem.description}
                 </div>
                 <div>
-                    <img src={props.postItem.postImgURL} className='post-image' />
+                    <img src={props.postItem.postImgURL} onClick={() => getPostByPostId(props.postItem.postId)} className='post-image' />
                 </div>
             </div>
             <div className='like-and-comment'>
@@ -43,7 +69,7 @@ const Post = (props) => {
                     {props.postItem.likeArray.length}
                 </div>
                 <div>
-                    <img src={textIcon} className='comment-symbol' />
+                    <img src={textIcon} onClick={() => getPostByPostId(props.postItem.postId)} className='comment-symbol' />
                 </div>
                 <div className='like-and-comment-count'>
                     {props.postItem.comments.length}
