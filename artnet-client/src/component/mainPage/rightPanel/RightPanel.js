@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import UserService from '../../../services/UserService';
-import PostService from '../../../services/PostService';
 import textIcon from '../../../images/text.png';
 import imageIcon from '../../../images/image.png';
 import avatar from "../../../images/avatar.png";
@@ -11,13 +10,11 @@ import './RightPanel.css'
 
 
 const RightPanel = (props) => {
-    const dispatch = useDispatch();
     const toggleModal = useSelector((state) => state.parameter.toggleModal);
     const userImage = useSelector((state) => state.user.userImage);
     const userName = useSelector((state) => state.user.userName)
     const [users, setUsers] = useState([]);
     const [show, setShow] = useState(false);
-    const UPDATE_USER_POST_ARRAY = 'UPDATE_USER_POST_ARRAY';
 
 
     useEffect(() => {
@@ -27,7 +24,6 @@ const RightPanel = (props) => {
     useEffect(() => {
         closeUploadModal();
         props.setUploadImage("");
-        getLocalUserPostArray();
     }, [toggleModal])
 
 
@@ -36,22 +32,6 @@ const RightPanel = (props) => {
             setUsers(response.data);
         });
     }
-
-    const getLocalUserPostArray = () => {
-        const userId = JSON.parse(localStorage.getItem("user")).userId;
-        PostService.getAllByUserId(userId).then(response => {
-            if (response.data.length > 0) {
-                undateUserPostArray(response.data);
-            } 
-        });
-    }
-
-    const undateUserPostArray = (post) => {
-        dispatch({
-            type: UPDATE_USER_POST_ARRAY,
-            userPostList: post
-        });
-    };
 
     const handleUserImg = (userImage) => {
         if (userImage === "" || userImage === undefined) {

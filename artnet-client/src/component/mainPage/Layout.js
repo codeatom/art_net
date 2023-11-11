@@ -21,6 +21,7 @@ const Layout = () => {
     const [postDescription, setPostDescription] = useState("");
     const [uploadProgress, setUploadProgress] = useState(0);
     const UPDATE_ALL_POST_ARRAY = 'UPDATE_ALL_POST_ARRAY';
+    const UPDATE_USER_POST_ARRAY = 'UPDATE_USER_POST_ARRAY';
     const UPDATE_USER_IMG = 'UPDATE_USER_IMG';
     const UPDATE_USER_NAME = 'UPDATE_USER_NAME';
     const TOGGLE_MODAL = 'TOGGLE_MODAL';
@@ -40,7 +41,6 @@ const Layout = () => {
 
     const upload = (error) => {
         const storage = getStorage();
-
         let storageRef = ref(storage, `post-images/${uploadImage.name + v4()}`);
 
         if (isProfileImg) {
@@ -48,7 +48,6 @@ const Layout = () => {
         }
 
         const uploadTask = uploadBytesResumable(storageRef, image);
-        const user = JSON.parse(localStorage.getItem("user"));
 
         uploadTask.on('state_changed', (snapshot) => {
             const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -58,33 +57,46 @@ const Layout = () => {
             () => {
                 getDownloadURL(uploadTask.snapshot.ref).then((url) => {
                     if (isProfileImg == false) {
-                        let postData = {
-                            "description": postDescription,
-                            "postImgURL": url,
-                            "userId": user.userId
-                        }
-                        PostService.createPost(postData).then(response => {
-                            undateAllPostArray(response.data);
-                            closeDialogBox();
-                        });
+                        uploadPostImg(url);
                     } else if (isProfileImg == true) {
-                        let userData = {
-                            "userId": user.userId,
-                            "userName": user.userName,
-                            "firstName": user.firstName,
-                            "lastName": user.lastName,
-                            "userEmail": user.userEmail,
-                            "userImage": url
-                        }
-                        UserService.updateUser(userData).then((response) => {
-                            undateUserImg(response.data.userImage);
-                            undateUserName(response.data.userName);
-                            closeDialogBox();
-                        });
+                        uploadProfileImg(url);
                     }
                 });
             }
         );
+    }
+
+    const uploadPostImg = (url) => {
+        const user = JSON.parse(localStorage.getItem("user"));
+
+        let postData = {
+            "description": postDescription,
+            "postImgURL": url,
+            "userId": user.userId
+        }
+        PostService.createPost(postData).then(response => {
+            updateAllPostArray(response.data);
+            updateUserPostArray();
+            closeDialogBox();
+        })
+    }
+
+    const uploadProfileImg = (url) => {
+        const user = JSON.parse(localStorage.getItem("user"));
+
+        let userData = {
+            "userId": user.userId,
+            "userName": user.userName,
+            "firstName": user.firstName,
+            "lastName": user.lastName,
+            "userEmail": user.userEmail,
+            "userImage": url
+        }
+        UserService.updateUser(userData).then((response) => {
+            updateUserImg(response.data.userImage);
+            updateUserName(response.data.userName);
+            closeDialogBox();
+        })
     }
 
     const handlePostDescription = (e) => {
@@ -98,21 +110,31 @@ const Layout = () => {
         });
     };
 
-    const undateAllPostArray = (post) => {
+    const updateUserPostArray = () => {
+        const userId = JSON.parse(localStorage.getItem("user")).userId;
+        PostService.getAllByUserId(userId).then(response => {
+            dispatch({
+                type: UPDATE_USER_POST_ARRAY,
+                userPostList: response.data,
+            });
+        });
+    };
+
+    const updateAllPostArray = (post) => {
         dispatch({
             type: UPDATE_ALL_POST_ARRAY,
             allPostList: post
         });
     };
 
-    const undateUserImg = (image) => {
+    const updateUserImg = (image) => {
         dispatch({
             type: UPDATE_USER_IMG,
             userImage: image
         });
     };
 
-    const undateUserName = (name) => {
+    const updateUserName = (name) => {
         dispatch({
             type: UPDATE_USER_NAME,
             userName: name
