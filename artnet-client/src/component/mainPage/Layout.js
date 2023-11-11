@@ -20,6 +20,9 @@ const Layout = () => {
     const [isProfileImg, setIsProfileImg] = useState(false);
     const [postDescription, setPostDescription] = useState("");
     const [uploadProgress, setUploadProgress] = useState(0);
+    const UPDATE_ALL_POST_ARRAY = 'UPDATE_ALL_POST_ARRAY';
+    const UPDATE_USER_IMG = 'UPDATE_USER_IMG';
+    const UPDATE_USER_NAME = 'UPDATE_USER_NAME';
     const TOGGLE_MODAL = 'TOGGLE_MODAL';
 
 
@@ -61,6 +64,7 @@ const Layout = () => {
                             "userId": user.userId
                         }
                         PostService.createPost(postData).then(response => {
+                            undateAllPostArray(response.data);
                             closeDialogBox();
                         });
                     } else if (isProfileImg == true) {
@@ -72,7 +76,9 @@ const Layout = () => {
                             "userEmail": user.userEmail,
                             "userImage": url
                         }
-                        UserService.updateUser(userData).then(() => {
+                        UserService.updateUser(userData).then((response) => {
+                            undateUserImg(response.data.userImage);
+                            undateUserName(response.data.userName);
                             closeDialogBox();
                         });
                     }
@@ -89,6 +95,27 @@ const Layout = () => {
         dispatch({
             type: TOGGLE_MODAL,
             toggleModal: !toggleModal
+        });
+    };
+
+    const undateAllPostArray = (post) => {
+        dispatch({
+            type: UPDATE_ALL_POST_ARRAY,
+            allPostList: post
+        });
+    };
+
+    const undateUserImg = (image) => {
+        dispatch({
+            type: UPDATE_USER_IMG,
+            userImage: image
+        });
+    };
+
+    const undateUserName = (name) => {
+        dispatch({
+            type: UPDATE_USER_NAME,
+            userName: name
         });
     };
 
