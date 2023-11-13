@@ -7,6 +7,9 @@ import UserPicUploadModal from '../modal/UserPicUploadModal';
 import DropDownMenu from './DropDownMenu';
 import "./Header.css";
 
+import { updateUserImg } from '../../../store/storeUtil';
+import { updateUserName } from '../../../store/storeUtil';
+
 
 const Header = (props) => {
     const dispatch = useDispatch();
@@ -14,8 +17,6 @@ const Header = (props) => {
     const userName = useSelector((state) => state.user.userName);
     const toggleModal = useSelector((state) => state.parameter.toggleModal);
     const menuRef = useRef();
-    const UPDATE_USER_IMG = 'UPDATE_USER_IMG';
-    const UPDATE_USER_NAME = 'UPDATE_USER_NAME';
     const [menuOpen, setMenuOpen] = useState(false);
     const [showUploadModal, setShowUploadModal] = useState(false);
 
@@ -41,24 +42,10 @@ const Header = (props) => {
     const getLocalUser = () => {
         const localUser = JSON.parse(localStorage.getItem("user"));
         UserService.getUserByUserId(localUser.userId).then(response => {
-            undateUserImg(response.data.userImage);
-            undateUserName(response.data.userName);
+            updateUserImg(dispatch, response.data.userImage);
+            updateUserName(dispatch, response.data.userName);
         });
     }
-
-    const undateUserImg = (image) => {
-        dispatch({
-            type: UPDATE_USER_IMG,
-            userImage: image
-        });
-    };
-
-    const undateUserName = (name) => {
-        dispatch({
-            type: UPDATE_USER_NAME,
-            userName: name
-        });
-    };
 
     const handleMenu = () => {
         setMenuOpen(!menuOpen);

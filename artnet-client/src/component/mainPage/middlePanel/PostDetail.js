@@ -5,10 +5,11 @@ import backbutton from '../../../images/back.png';
 import textIcon from '../../../images/text.png';
 import Comment from './Comment';
 
+import { setIsPostDetail } from '../../../store/storeUtil';
+
 
 const PostDetail = (props) => {
     const dispatch = useDispatch();
-    const IS_POST_DETAIL = 'IS_POST_DETAIL';
 
     const handleUserImg = (profileImg) => {
         if (profileImg === "" || profileImg === undefined) {
@@ -17,18 +18,11 @@ const PostDetail = (props) => {
         return profileImg;
     }
 
-    const setIsPostDetail = (postDetail) => {
-        dispatch({
-            type: IS_POST_DETAIL,
-            isPostDetail: postDetail
-        });
-    };
-
 
     return (
         <div>
             <div className='back-btn-div'>
-                <img className='back-btn-icon' src={backbutton} onClick={() => setIsPostDetail(false)} />
+                <img className='back-btn-icon' src={backbutton} onClick={() => setIsPostDetail(dispatch, false)} />
             </div>
 
             <div>

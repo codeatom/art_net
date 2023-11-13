@@ -11,6 +11,12 @@ import UserService from '../../services/UserService';
 import PostService from '../../services/PostService';
 import './Layout.css';
 
+import { updateAllPostArray } from '../../store/storeUtil';
+import { updateUserPostArray } from '../../store/storeUtil';
+import { updateUserImg } from '../../store/storeUtil';
+import { updateUserName } from '../../store/storeUtil';
+import { closeDialogBox } from '../../store/storeUtil';
+
 
 const Layout = () => {
     const dispatch = useDispatch();
@@ -20,11 +26,6 @@ const Layout = () => {
     const [isProfileImg, setIsProfileImg] = useState(false);
     const [postDescription, setPostDescription] = useState("");
     const [uploadProgress, setUploadProgress] = useState(0);
-    const UPDATE_ALL_POST_ARRAY = 'UPDATE_ALL_POST_ARRAY';
-    const UPDATE_USER_POST_ARRAY = 'UPDATE_USER_POST_ARRAY';
-    const UPDATE_USER_IMG = 'UPDATE_USER_IMG';
-    const UPDATE_USER_NAME = 'UPDATE_USER_NAME';
-    const TOGGLE_MODAL = 'TOGGLE_MODAL';
 
 
     const openDialog = (e) => {
@@ -75,9 +76,9 @@ const Layout = () => {
             "userId": user.userId
         }
         PostService.createPost(postData).then(response => {
-            updateAllPostArray(response.data);
-            updateUserPostArray();
-            closeDialogBox();
+            updateAllPostArray(dispatch, response.data);
+            updateLocalUserPostArray();
+            closeDialogBox(dispatch, toggleModal);
         })
     }
 
@@ -93,9 +94,9 @@ const Layout = () => {
             "userImage": url
         }
         UserService.updateUser(userData).then((response) => {
-            updateUserImg(response.data.userImage);
-            updateUserName(response.data.userName);
-            closeDialogBox();
+            updateUserImg(dispatch, response.data.userImage);
+            updateUserName(dispatch, response.data.userName);
+            closeDialogBox(dispatch, toggleModal);
         })
     }
 
@@ -103,41 +104,10 @@ const Layout = () => {
         setPostDescription(e.target.value);
     }
 
-    const closeDialogBox = () => {
-        dispatch({
-            type: TOGGLE_MODAL,
-            toggleModal: !toggleModal
-        });
-    };
-
-    const updateUserPostArray = () => {
+    const updateLocalUserPostArray = () => {
         const userId = JSON.parse(localStorage.getItem("user")).userId;
         PostService.getAllByUserId(userId).then(response => {
-            dispatch({
-                type: UPDATE_USER_POST_ARRAY,
-                userPostList: response.data,
-            });
-        });
-    };
-
-    const updateAllPostArray = (post) => {
-        dispatch({
-            type: UPDATE_ALL_POST_ARRAY,
-            allPostList: post
-        });
-    };
-
-    const updateUserImg = (image) => {
-        dispatch({
-            type: UPDATE_USER_IMG,
-            userImage: image
-        });
-    };
-
-    const updateUserName = (name) => {
-        dispatch({
-            type: UPDATE_USER_NAME,
-            userName: name
+            updateUserPostArray(dispatch, response.data)
         });
     };
 

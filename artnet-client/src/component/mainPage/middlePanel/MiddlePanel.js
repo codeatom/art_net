@@ -2,10 +2,12 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import UserService from '../../../services/UserService';
 import PostService from '../../../services/PostService';
-import CommentService from '../../../services/CommentService';
 import Post from './Post';
 import PostDetail from './PostDetail';
 import './MiddlePanel.css';
+
+import { updateUserPostArray } from '../../../store/storeUtil';
+import { setIsPostDetail } from '../../../store/storeUtil';
 
 
 const MiddlePanel = () => {
@@ -13,10 +15,6 @@ const MiddlePanel = () => {
     const singlePostArray = useSelector((state) => state.post.singlePostArray);
     const userPostArray = useSelector((state) => state.post.userPostArray);
     const isPostDetail = useSelector((state) => state.parameter.isPostDetail);
-    const UPDATE_USER_POST_ARRAY = 'UPDATE_USER_POST_ARRAY';
-    const UPDATE_SINGLE_POST_ARRAY = 'UPDATE_SINGLE_POST_ARRAY';
-    const IS_POST_DETAIL = 'IS_POST_DETAIL';
-
 
     useEffect(() => {
         getLocalUserPostArray();
@@ -26,7 +24,7 @@ const MiddlePanel = () => {
         const userId = JSON.parse(localStorage.getItem("user")).userId;
         PostService.getAllByUserId(userId).then(response => {
             if (response.data.length > 0) {
-                undateUserPostArray(response.data);
+                updateUserPostArray(dispatch, response.data);
             } else {
                 getDummyPostArray();
             }
@@ -47,24 +45,9 @@ const MiddlePanel = () => {
                     comments: []
                 }
             ]
-            undateUserPostArray(dummyPostArray);
+            updateUserPostArray(dispatch, dummyPostArray);
         });
     }
-
-    const undateUserPostArray = (post) => {
-        dispatch({
-            type: UPDATE_USER_POST_ARRAY,
-            userPostList: post
-        });
-    };
-
-    const setIsPostDetail = (postDetail) => {
-        dispatch({
-            type: IS_POST_DETAIL,
-            isPostDetail: postDetail
-        });
-    };
-
 
 
     return (

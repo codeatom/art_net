@@ -5,14 +5,15 @@ import PostService from '../../../services/PostService';
 import likebutton from '../../../images/likebutton.png';
 import "./LeftPanel.css";
 
+import { updateAllPostArray } from '../../../store/storeUtil';
+import { updateUserPostArray } from '../../../store/storeUtil';
+import { updateSinglePostArray } from '../../../store/storeUtil';
+import { setIsPostDetail } from '../../../store/storeUtil';
+
 
 const LeftSide = () => {
     const dispatch = useDispatch();
     const allPostArray = useSelector((state) => state.post.allPostArray);
-    const UPDATE_ALL_POST_ARRAY = 'UPDATE_ALL_POST_ARRAY';
-    const UPDATE_USER_POST_ARRAY = 'UPDATE_USER_POST_ARRAY';
-    const UPDATE_SINGLE_POST_ARRAY = 'UPDATE_SINGLE_POST_ARRAY';
-    const IS_POST_DETAIL = 'IS_POST_DETAIL';
 
     useEffect(() => {
         getAllPost();
@@ -20,49 +21,21 @@ const LeftSide = () => {
 
     const getAllPost = () => {
         PostService.getAllPost().then(response => {
-            undateAllPostArray(response.data);
+            updateAllPostArray(dispatch, response.data);
         });
     }
 
     const getAllByUserId = (userId) => {
         const post = allPostArray.filter((item) => item.user.userId === userId)
-        undateUserPostArray(post);
-        setIsPostDetail(false);
+        updateUserPostArray(dispatch, post);
+        setIsPostDetail(dispatch, false);
     }
 
     const getPostByPostId = (postId) => {
         const post = allPostArray.filter((item) => item.postId === postId)
-        undateSinglePostArray(post);
-        setIsPostDetail(true);
+        updateSinglePostArray(dispatch, post);
+        setIsPostDetail(dispatch, true);
     }
-
-    const undateAllPostArray = (post) => {
-        dispatch({
-            type: UPDATE_ALL_POST_ARRAY,
-            allPostList: post
-        });
-    };
-
-    const undateUserPostArray = (post) => {
-        dispatch({
-            type: UPDATE_USER_POST_ARRAY,
-            userPostList: post
-        });
-    };
-
-    const undateSinglePostArray = (post) => {
-        dispatch({
-            type: UPDATE_SINGLE_POST_ARRAY,
-            singlePostList: post
-        });
-    };
-
-    const setIsPostDetail = (postDetail) => {
-        dispatch({
-            type: IS_POST_DETAIL,
-            isPostDetail: postDetail
-        });
-    };
 
     const handleUserImg = (userImage) => {
         if (userImage === "" || userImage === undefined) {

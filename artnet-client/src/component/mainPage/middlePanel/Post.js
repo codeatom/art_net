@@ -5,12 +5,13 @@ import likebutton from '../../../images/likebutton.png';
 import textIcon from '../../../images/text.png';
 import Comment from './Comment';
 
+import { updateSinglePostArray } from '../../../store/storeUtil';
+import { setIsPostDetail } from '../../../store/storeUtil';
+
 
 const Post = (props) => {
     const dispatch = useDispatch();
     const allPostArray = useSelector((state) => state.post.allPostArray);
-    const UPDATE_SINGLE_POST_ARRAY = 'UPDATE_SINGLE_POST_ARRAY';
-    const IS_POST_DETAIL = 'IS_POST_DETAIL';
 
     const handleUserImg = (userImage) => {
         if (userImage === "" || userImage === undefined) {
@@ -19,24 +20,10 @@ const Post = (props) => {
         return userImage;
     }
 
-    const undateSinglePostArray = (post) => {
-        dispatch({
-            type: UPDATE_SINGLE_POST_ARRAY,
-            singlePostList: post
-        });
-    };
-
-    const setIsPostDetail = (postDetail) => {
-        dispatch({
-            type: IS_POST_DETAIL,
-            isPostDetail: postDetail
-        });
-    };
-
     const getPostByPostId = (postId) => {
         const post = allPostArray.filter((item) => item.postId === postId)
-        undateSinglePostArray(post);
-        setIsPostDetail(true);
+        updateSinglePostArray(dispatch, post);
+        setIsPostDetail(dispatch, true);
     }
 
 
