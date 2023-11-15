@@ -1,9 +1,11 @@
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import avatar from '../../../images/avatar.png';
 import likebutton from '../../../images/likebutton.png';
 import textIcon from '../../../images/text.png';
 import PostService from '../../../services/PostService';
 
+import { updateUserPostArray } from '../../../store/storeUtil';
 import { updateSinglePostArray } from '../../../store/storeUtil';
 import { updateChatArray } from '../../../store/storeUtil';
 import { disconnectFromChat } from '../../../store/storeUtil';
@@ -13,6 +15,13 @@ import { hideTxtBox } from '../../../store/storeUtil';
 
 const Post = (props) => {
     const dispatch = useDispatch();
+    const [hideIcon, setHideIcon] = useState(false);
+
+    useEffect(() => {
+        if (props.postItem.postId < 1) {
+            setHideIcon(true);
+        }
+    }, [])
     
     const handleUserImg = (userImage) => {
         if (userImage === "" || userImage === undefined) {
@@ -39,6 +48,15 @@ const Post = (props) => {
         updateChatArray(dispatch, []);
     }
 
+    const setLikes = (postId) => {
+        const localUser = JSON.parse(localStorage.getItem("user"));
+        PostService.setLikes(postId, localUser.userId).then((response) => {
+            PostService.getAllByUserId(response.data.user.userId).then((response) => {
+                updateUserPostArray(dispatch, response.data);
+            })
+        })
+    }
+
 
     return (
         <div className='post-div bg-col-chngr'>
@@ -61,14 +79,14 @@ const Post = (props) => {
                     <img src={props.postItem.postImgURL} onClick={() => getPostByPostId(props.postItem.postId)} className='post-image' />
                 </div>
             </div>
-            <div className='like-and-comment'>
+            <div className='like-and-comment' hidden={hideIcon}>
                 <div>
                     <img src={textIcon} onClick={() => postComment(props.postItem.postId, true)} className='comment-symbol' />
                 </div>
                 <div className='like-and-comment-count'>
                     {props.postItem.comments.length}
                 </div>
-                <div onClick={() => props.setLikes(props.postItem.postId)}>
+                <div onClick={() => setLikes(props.postItem.postId)}>
                     <img src={likebutton} className='like-symbol' />
                 </div>
                 <div className='like-and-comment-count'>

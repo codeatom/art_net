@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PostService from '../../../services/PostService';
 import likebutton from '../../../images/likebutton.png';
+import textIcon from '../../../images/text.png';
 import avatar from "../../../images/avatar.png";
 import "./LeftPanel.css";
 
@@ -83,6 +84,12 @@ const LeftSide = () => {
                             </div>
 
                             <div className='left-panel-like-div'>
+                                <div>
+                                    <img src={textIcon} className='left-panel-like-symbol' />
+                                </div>
+                                <div className='left-panel-like-count'>
+                                    {item.comments.length}
+                                </div>
                                 <div>
                                     <img src={likebutton} className='left-panel-like-symbol' />
                                 </div>

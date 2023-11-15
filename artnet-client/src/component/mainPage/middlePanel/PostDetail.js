@@ -9,6 +9,7 @@ import CommentService from '../../../services/CommentService';
 import Comment from './Comment';
 import Chat from './Chat';
 
+import { updateSinglePostArray } from '../../../store/storeUtil';
 import { updateUserPostArray } from '../../../store/storeUtil';
 import { setIsPostDetail } from '../../../store/storeUtil';
 import { hideTxtBox } from '../../../store/storeUtil';
@@ -54,6 +55,14 @@ const PostDetail = (props) => {
 
     const handleComment = (e) => {
         setComment(e.target.value);
+    }
+
+    const setLikes = (postId) => {
+        const localUser = JSON.parse(localStorage.getItem("user"));
+        PostService.setLikes(postId, localUser.userId).then((response) => {
+            let post = [response.data];
+            updateSinglePostArray(dispatch, post);
+        })
     }
 
     const postComment = (e) => {
@@ -114,7 +123,7 @@ const PostDetail = (props) => {
                             <div className='like-and-comment-count'>
                                 {props.postItem.comments.length}
                             </div>
-                            <div onClick={() => props.setLikes(props.postItem.postId)}>
+                            <div onClick={() => setLikes(props.postItem.postId)}>
                                 <img src={likebutton} className='like-symbol' />
                             </div>
                             <div className='like-and-comment-count'>
@@ -143,7 +152,6 @@ const PostDetail = (props) => {
             </div>
 
             <div ref={chatRef} />
-
         </div>
     );
 }

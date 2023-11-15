@@ -72,6 +72,11 @@ const Header = (props) => {
         setShowUploadModal(false);
     }
 
+    const logout = () => {
+        localStorage.removeItem("user");
+        window.location.reload();
+    }
+
 
     return (
         <div className="container header-div">
@@ -102,6 +107,9 @@ const Header = (props) => {
                             <ul>
                                 <div onClick={openUploadModal}>
                                     <DropDownMenu text="Add profile pic" />
+                                </div>
+                                <div onClick={logout}>
+                                    <DropDownMenu text="Logout" />
                                 </div>
                             </ul>
                         </div>

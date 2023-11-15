@@ -15,7 +15,7 @@ const Comment = (props) => {
             {
                 props.item.comments != null ?
                     props.item.comments.map((item) => (
-                        <div className='all-comment'>
+                        <div className='all-comment bg-col-chngr'>
                             <div className='comment'>
                                 <div>
                                     <img className='avatar' src={handleUserImg(item.user.userImage)} />
