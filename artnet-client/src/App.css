@@ -63,16 +63,24 @@
 }
 
 .h-line-left {
-  border-bottom: 1px solid #CDD0D4;
+  border-bottom: 1px solid #e6ebee;
 }
 
 .v-line-left {
-  border-left: 1px solid #CDD0D4;
+  border-left: 1px solid #e6ebee;
 }
 
 .v-line-right {
-  border-right: 1px solid #CDD0D4;
+  border-right: 1px solid #e6ebee;
 }
+
+.bg-col-chngr {
+  background-color:rgb(255, 255, 255);
+  }
+  
+  .bg-col-chngr:hover {
+  background-color: #f5f5f5
+  }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
 div::-webkit-scrollbar {
@@ -86,5 +94,6 @@ div {
   scrollbar-width: none;
   /* Firefox */
 }
+
 
 

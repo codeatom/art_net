@@ -11,7 +11,7 @@ const ImageLayout = (props) => {
     }
 
     return (
-        <div className='user-img-layout' key={props.item.userId}>
+        <div className='user-img-layout bg-col-chngr' key={props.item.userId}>
             <div className='user-img'>
                 <div>
                     <img className='avatar' src={handleUserImg(props.item.userImage)} />

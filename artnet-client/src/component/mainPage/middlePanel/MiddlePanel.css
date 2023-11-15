@@ -1,3 +1,7 @@
+.post-div {
+    border-bottom: 1px solid #e6ebee;
+}
+
 .post-header {
     display: flex;
 }
@@ -16,14 +20,18 @@
 
 .like-symbol {
     height: 30px;
-    margin-left: 10px;
+    margin-left: 30px;
     cursor: pointer;
 } 
 
 .comment-symbol {
     width: 30px;
-    margin-left: 50px;
+    margin-left: 20px;
 }
+
+.post-img-div {
+    border-bottom: 1px solid #e6ebee;
+} 
 
 .post-image {
     width: 500px;
@@ -46,13 +54,10 @@
 
 /* Comment */
 
-.comment-section {
-    border-bottom: 1px solid #CDD0D4;
-}
-
 .all-comment {
     margin-left: 80px;
-    border-bottom: 1px solid #CDD0D4;
+    border-bottom: 1px solid #e6ebee;
+    width: 80%;
 }
 
 .comment {
@@ -102,4 +107,23 @@
 
 .post-description {
     margin-bottom: 10px;
+}
+
+.comment-text-div {
+    display: flex;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.comment-text-box {
+    height: 30px;
+    width: 300px;
+    border: 0px;
+    background-color: #EFF2F5;
+    border-radius: 30px;
+    font-size: 16px;
+    margin-left: 20px;
+    margin-top: 10px;
+    padding-left: 20px;
 }

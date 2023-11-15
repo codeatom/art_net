@@ -1,6 +1,6 @@
 .right-panel-profile-div {
     margin-top: 20px;
-    border-bottom: 1px solid #edf1f3;
+    border-bottom: 1px solid #e6ebee;
 }
 
 .profile-data {
@@ -27,10 +27,10 @@
 /*------UserImageLayout------*/
 
 .user-img-layout {
-    margin-top: 10px;
     padding: 10px;
     margin-left: 10px;
     margin-right: 10px;
+    border-bottom: 1px solid #e6ebee;
 }
 
 .user-img {

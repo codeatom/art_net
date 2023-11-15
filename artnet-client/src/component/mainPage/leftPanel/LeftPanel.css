@@ -1,6 +1,6 @@
 .left-panel-paper {
     padding-bottom: 10px;
-    border-bottom: 1px solid #CDD0D4;
+    border-bottom: 1px solid #e6ebee;
 }
 
 .left-panel-post-header {
@@ -35,4 +35,9 @@
     margin-bottom: 10px;
     margin-left: 10px;
     font-size: 14px;
+}
+
+.on-scroll {
+    overflow: scroll;
+    max-height: 1000px;
 }

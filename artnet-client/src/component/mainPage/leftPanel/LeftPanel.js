@@ -1,14 +1,17 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import avatar from "../../../images/avatar.png";
 import PostService from '../../../services/PostService';
 import likebutton from '../../../images/likebutton.png';
+import avatar from "../../../images/avatar.png";
 import "./LeftPanel.css";
 
 import { updateAllPostArray } from '../../../store/storeUtil';
 import { updateUserPostArray } from '../../../store/storeUtil';
 import { updateSinglePostArray } from '../../../store/storeUtil';
+import { updateChatArray } from '../../../store/storeUtil';
+import { disconnectFromChat } from '../../../store/storeUtil';
 import { setIsPostDetail } from '../../../store/storeUtil';
+import { hideTxtBox } from '../../../store/storeUtil';
 
 
 const LeftSide = () => {
@@ -26,15 +29,21 @@ const LeftSide = () => {
     }
 
     const getAllByUserId = (userId) => {
-        const post = allPostArray.filter((item) => item.user.userId === userId)
-        updateUserPostArray(dispatch, post);
+        PostService.getAllByUserId(userId).then(response => {
+            updateUserPostArray(dispatch, response.data);
+        });
         setIsPostDetail(dispatch, false);
     }
 
     const getPostByPostId = (postId) => {
-        const post = allPostArray.filter((item) => item.postId === postId)
-        updateSinglePostArray(dispatch, post);
+        PostService.getPostByPostId(postId).then(response => {
+            let post = [response.data]
+            updateSinglePostArray(dispatch, post);
+        });
         setIsPostDetail(dispatch, true);
+        hideTxtBox(dispatch, true);
+        updateChatArray(dispatch, []);
+        disconnectFromChat(dispatch, true);
     }
 
     const handleUserImg = (userImage) => {
@@ -44,13 +53,20 @@ const LeftSide = () => {
         return userImage;
     }
 
+    const handleScroll = (e) => {
+        const bottom = e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight < 1;
+        if (bottom) {
+            getAllPost();
+        }
+    }
+
 
     return (
-        <div>
+        <div className='on-scroll' onScroll={handleScroll}>
             {
                 allPostArray != null ?
                     allPostArray.map((item) => (
-                        <div key={item.userId} className='left-panel-paper v-line'>
+                        <div key={item.userId} className='left-panel-paper v-line bg-col-chngr'>
                             <div className='left-panel-post-header'>
                                 <div>
                                     <img className='avatar left-panel-avatar-padding' src={handleUserImg(item.user.userImage)} />
