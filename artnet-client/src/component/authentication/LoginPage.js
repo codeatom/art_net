@@ -86,7 +86,7 @@ const LoginPage = () => {
 
 
     return (
-        <div class="auth-div">
+        <div class="container auth-div">
             {
                 status == STATUS.LOGIN ?
 

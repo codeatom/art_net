@@ -127,3 +127,42 @@
     margin-top: 10px;
     padding-left: 20px;
 }
+
+.txt-icon{  
+    position: relative;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+    opacity: 0;
+    right: 215px;
+    bottom: -20px;
+    
+}
+
+.txt-icon span { 
+    background-color: rgb(159, 158, 158); 
+}
+
+.txt-icon:hover{
+    opacity: 1;
+    transition: 0.6s opacity;
+}
+
+.like-icon{  
+    position: relative;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+    opacity: 0;
+    right: -55px;
+    bottom: -20px;
+}
+
+.like-icon span { 
+    background-color: rgb(159, 158, 158); 
+}
+
+.like-icon:hover{
+    opacity: 1;
+    transition: 0.6s opacity;
+}

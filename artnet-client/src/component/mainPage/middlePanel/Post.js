@@ -22,7 +22,7 @@ const Post = (props) => {
             setHideIcon(true);
         }
     }, [])
-    
+
     const handleUserImg = (userImage) => {
         if (userImage === "" || userImage === undefined) {
             return avatar;
@@ -31,6 +31,10 @@ const Post = (props) => {
     }
 
     const getPostByPostId = (postId) => {
+        setTimeout(() => {
+            disconnectFromChat(dispatch, true);
+        }, 1000);
+
         PostService.getPostByPostId(postId).then(response => {
             let post = [response.data]
             updateSinglePostArray(dispatch, post);
@@ -38,12 +42,11 @@ const Post = (props) => {
         setIsPostDetail(dispatch, true);
         hideTxtBox(dispatch, true);
         updateChatArray(dispatch, []);
-        disconnectFromChat(dispatch, true);
     }
 
     const postComment = (postId) => {
-        props.connectUserToChat(postId);
         getPostByPostId(postId);
+        props.connectUserToChat(postId);
         hideTxtBox(dispatch, false);
         updateChatArray(dispatch, []);
     }
@@ -86,12 +89,14 @@ const Post = (props) => {
                 <div className='like-and-comment-count'>
                     {props.postItem.comments.length}
                 </div>
+                <div className='like-icon'><span>Like it</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
                 <div onClick={() => setLikes(props.postItem.postId)}>
                     <img src={likebutton} className='like-symbol' />
                 </div>
                 <div className='like-and-comment-count'>
                     {props.postItem.likeArray.length}
                 </div>
+                <div className='txt-icon'><span>Reply</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
             </div>
         </div>
     );

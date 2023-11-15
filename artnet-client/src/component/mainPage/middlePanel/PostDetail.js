@@ -123,12 +123,14 @@ const PostDetail = (props) => {
                             <div className='like-and-comment-count'>
                                 {props.postItem.comments.length}
                             </div>
+                            <div className='like-icon'><span>Like it</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
                             <div onClick={() => setLikes(props.postItem.postId)}>
                                 <img src={likebutton} className='like-symbol' />
                             </div>
                             <div className='like-and-comment-count'>
                                 {props.postItem.likeArray.length}
                             </div>
+                            <div className='txt-icon'><span>Reply</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
                         </div>
                     </div>
                 </div>
