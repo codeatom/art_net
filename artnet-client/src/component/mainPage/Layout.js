@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL, deleteObject } from "firebase/storage";
 import { v4 } from 'uuid';
 import Header from './header/Header';
 import Footer from './footer/Footer'
@@ -84,7 +84,6 @@ const Layout = () => {
 
     const uploadProfileImg = (url) => {
         const user = JSON.parse(localStorage.getItem("user"));
-
         let userData = {
             "userId": user.userId,
             "userName": user.userName,
@@ -93,11 +92,26 @@ const Layout = () => {
             "userEmail": user.userEmail,
             "userImage": url
         }
+
+        deleteFromFirebaseStorage(user.userId);
+
         UserService.updateUser(userData).then((response) => {
             updateUserImg(dispatch, response.data.userImage);
             updateUserName(dispatch, response.data.userName);
             closeDialogBox(dispatch, toggleModal);
         })
+    }
+
+    const deleteFromFirebaseStorage = async (userId) => {
+        await UserService.getUserByUserId(userId).then((response) => {
+            if (response.data.userImage != "" && response.data.userImage != undefined) {
+                const storage = getStorage();
+                const userImgRef = ref(storage, response.data.userImage);
+                deleteObject(userImgRef)
+            }
+        }).catch((error) => {
+            console.log(error)
+        });
     }
 
     const handlePostDescription = (e) => {

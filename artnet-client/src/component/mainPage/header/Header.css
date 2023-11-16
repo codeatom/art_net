@@ -23,7 +23,7 @@
   position: absolute;
   top: 45px;
   right: 50px;
-  height: 100px;
+  height: 300px;
   width: 200px;
   background-color: rgb(231, 231, 238);
 }
@@ -36,4 +36,8 @@
 
 .header-dropdown-menu-text:hover {
   color: red;
+}
+
+.edit-btn {
+  margin-left: 10px;
 }

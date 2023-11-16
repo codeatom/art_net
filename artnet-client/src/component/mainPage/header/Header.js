@@ -5,6 +5,7 @@ import avatar from "../../../images/avatar.png";
 import UserService from '../../../services/UserService';
 import UserPicUploadModal from '../modal/UserPicUploadModal';
 import DropDownMenu from './DropDownMenu';
+import DeleteProfilePicModal from '../modal/DeleteProfilePicModal';
 import "./Header.css";
 
 import { updateUserImg } from '../../../store/storeUtil';
@@ -19,6 +20,7 @@ const Header = (props) => {
     const menuRef = useRef();
     const [menuOpen, setMenuOpen] = useState(false);
     const [showUploadModal, setShowUploadModal] = useState(false);
+    const [showDeleteProfilePicModal, setShowDeleteProfilePicModal] = useState(false);
 
 
     useEffect(() => {
@@ -77,6 +79,15 @@ const Header = (props) => {
         window.location.reload();
     }
 
+    const openDeleteProfilePicModal = () => {
+        setShowDeleteProfilePicModal(true);
+        setMenuOpen(false);
+    }
+
+    const closeDeleteProfilePicModal = () => {
+        setShowDeleteProfilePicModal(false);
+    }
+
 
     return (
         <div className="container header-div">
@@ -108,6 +119,9 @@ const Header = (props) => {
                                 <div onClick={openUploadModal}>
                                     <DropDownMenu text="Add profile pic" />
                                 </div>
+                                <div onClick={openDeleteProfilePicModal}>
+                                    <DropDownMenu text="Delete profile pic" />
+                                </div>
                                 <div onClick={logout}>
                                     <DropDownMenu text="Logout" />
                                 </div>
@@ -125,6 +139,10 @@ const Header = (props) => {
                 downloadURL={props.downloadURL}
                 uploadToFirebase={props.uploadToFirebase}
                 uploadProgress={props.uploadProgress} />
+
+            <DeleteProfilePicModal
+                showDeleteProfilePicModal={showDeleteProfilePicModal}
+                closeDeleteProfilePicModal={closeDeleteProfilePicModal} />
 
         </div>
     );
