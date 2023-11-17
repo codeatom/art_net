@@ -5,6 +5,7 @@ import avatar from "../../../images/avatar.png";
 import UserService from '../../../services/UserService';
 import UserPicUploadModal from '../modal/UserPicUploadModal';
 import DropDownMenu from './DropDownMenu';
+import EditProfileModal from '../modal/EditProfileModal';
 import DeleteProfilePicModal from '../modal/DeleteProfilePicModal';
 import "./Header.css";
 
@@ -20,6 +21,7 @@ const Header = (props) => {
     const menuRef = useRef();
     const [menuOpen, setMenuOpen] = useState(false);
     const [showUploadModal, setShowUploadModal] = useState(false);
+    const [showEditProfileModal, setShowEditProfileModal] = useState(false);
     const [showDeleteProfilePicModal, setShowDeleteProfilePicModal] = useState(false);
 
 
@@ -88,6 +90,15 @@ const Header = (props) => {
         setShowDeleteProfilePicModal(false);
     }
 
+    const openEditProfileModal = () => {
+        setShowEditProfileModal(true);
+        setMenuOpen(false);
+    }
+
+    const closeEditProfileModal = () => {
+        setShowEditProfileModal(false);
+    }
+
 
     return (
         <div className="container header-div">
@@ -116,14 +127,17 @@ const Header = (props) => {
                         </div>
                         <div className='header-dropdown-menu' hidden={!menuOpen}>
                             <ul>
+                                <div onClick={logout}>
+                                    <DropDownMenu text="Logout" />
+                                </div>
                                 <div onClick={openUploadModal}>
                                     <DropDownMenu text="Add profile pic" />
                                 </div>
                                 <div onClick={openDeleteProfilePicModal}>
                                     <DropDownMenu text="Delete profile pic" />
                                 </div>
-                                <div onClick={logout}>
-                                    <DropDownMenu text="Logout" />
+                                <div onClick={openEditProfileModal}>
+                                    <DropDownMenu text="Edit profile" />
                                 </div>
                             </ul>
                         </div>
@@ -143,6 +157,10 @@ const Header = (props) => {
             <DeleteProfilePicModal
                 showDeleteProfilePicModal={showDeleteProfilePicModal}
                 closeDeleteProfilePicModal={closeDeleteProfilePicModal} />
+                
+            <EditProfileModal
+                showEditProfileModal={showEditProfileModal}
+                closeEditProfileModal={closeEditProfileModal} />
 
         </div>
     );

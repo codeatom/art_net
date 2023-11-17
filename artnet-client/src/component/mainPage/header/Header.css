@@ -41,3 +41,14 @@
 .edit-btn {
   margin-left: 10px;
 }
+
+.text-input-div{
+  display: flex;
+  padding-left: 20px;
+}
+
+.text-input {
+  width: 200px;
+  margin-left: 20px;
+  margin-bottom: 5px;
+}
