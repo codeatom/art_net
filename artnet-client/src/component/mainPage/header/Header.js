@@ -7,6 +7,7 @@ import UserPicUploadModal from '../modal/UserPicUploadModal';
 import DropDownMenu from './DropDownMenu';
 import EditProfileModal from '../modal/EditProfileModal';
 import DeleteProfilePicModal from '../modal/DeleteProfilePicModal';
+import ResetEmailOrPasswordModal from '../modal/ResetEmailOrPasswordModal';
 import "./Header.css";
 
 import { updateUserImg } from '../../../store/storeUtil';
@@ -23,6 +24,8 @@ const Header = (props) => {
     const [showUploadModal, setShowUploadModal] = useState(false);
     const [showEditProfileModal, setShowEditProfileModal] = useState(false);
     const [showDeleteProfilePicModal, setShowDeleteProfilePicModal] = useState(false);
+    const [showResetEmailOrPwdModal, setShowResetEmailOrPwdModal] = useState(false);
+    const [isEmailReset, setIsEmailReset] = useState(false);
 
 
     useEffect(() => {
@@ -99,6 +102,16 @@ const Header = (props) => {
         setShowEditProfileModal(false);
     }
 
+    const openResetEmailOrPwdModal = (reset) => {
+        setShowResetEmailOrPwdModal(true);
+        setIsEmailReset(reset);
+        setMenuOpen(false);
+    }
+
+    const closeResetEmailOrPwdModal = () => {
+        setShowResetEmailOrPwdModal(false);
+    }
+
 
     return (
         <div className="container header-div">
@@ -127,9 +140,6 @@ const Header = (props) => {
                         </div>
                         <div className='header-dropdown-menu' hidden={!menuOpen}>
                             <ul>
-                                <div onClick={logout}>
-                                    <DropDownMenu text="Logout" />
-                                </div>
                                 <div onClick={openUploadModal}>
                                     <DropDownMenu text="Add profile pic" />
                                 </div>
@@ -138,6 +148,15 @@ const Header = (props) => {
                                 </div>
                                 <div onClick={openEditProfileModal}>
                                     <DropDownMenu text="Edit profile" />
+                                </div>
+                                <div onClick={()=>openResetEmailOrPwdModal(false)}>
+                                    <DropDownMenu text="Reset password" />
+                                </div>
+                                <div onClick={()=>openResetEmailOrPwdModal(true)}>
+                                    <DropDownMenu text="Reset email" />
+                                </div>
+                                <div onClick={logout}>
+                                    <DropDownMenu text="Logout" />
                                 </div>
                             </ul>
                         </div>
@@ -157,10 +176,15 @@ const Header = (props) => {
             <DeleteProfilePicModal
                 showDeleteProfilePicModal={showDeleteProfilePicModal}
                 closeDeleteProfilePicModal={closeDeleteProfilePicModal} />
-                
+
             <EditProfileModal
                 showEditProfileModal={showEditProfileModal}
                 closeEditProfileModal={closeEditProfileModal} />
+
+            <ResetEmailOrPasswordModal
+                showResetEmailOrPwdModal={showResetEmailOrPwdModal}
+                closeResetEmailOrPwdModal={closeResetEmailOrPwdModal}
+                isEmailReset={isEmailReset} />
 
         </div>
     );
