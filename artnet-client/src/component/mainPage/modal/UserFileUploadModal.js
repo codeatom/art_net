@@ -24,20 +24,22 @@ const UserFileUploadModal = (props) => {
         <div>
 
             <Modal
-                show={props.show}
+                show={props.showUploadModal}
                 onHide={props.closeUploadModal}
                 backdrop="static"
                 keyboard={false}
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>Create Post</Modal.Title>
+                    <div hidden={!props.isProfileImg}><Modal.Title>Choose Profile Pic</Modal.Title></div>
+                    <div hidden={props.isProfileImg}><Modal.Title>Create Post</Modal.Title></div>
                 </Modal.Header>
                 <Modal.Body>
                     <textarea
                         rows={3} cols={55} type='text'
                         placeholder='description'
                         className='upload-text'
-                        onChange={props.handlePostDescription} />
+                        onChange={props.handlePostDescription}
+                        hidden={props.isProfileImg} />
                     <img
                         src={props.uploadImage}
                         className='upload-img-preview' />

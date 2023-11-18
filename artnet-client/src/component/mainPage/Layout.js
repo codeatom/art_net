@@ -132,6 +132,7 @@ const Layout = () => {
                 <Header
                     uploadImage={uploadImage}
                     setUploadImage={setUploadImage}
+                    isProfileImg={isProfileImg}
                     setIsProfileImg={setIsProfileImg}
                     uploadToFirebase={uploadToFirebase}
                     uploadProgress={uploadProgress} />
@@ -150,10 +151,11 @@ const Layout = () => {
                     <RightPanel
                         uploadImage={uploadImage}
                         setUploadImage={setUploadImage}
+                        isProfileImg={isProfileImg}
                         setIsProfileImg={setIsProfileImg}
                         uploadToFirebase={uploadToFirebase}
-                        handlePostDescription={handlePostDescription}
-                        uploadProgress={uploadProgress} />
+                        uploadProgress={uploadProgress}
+                        handlePostDescription={handlePostDescription} />
                 </div>
             </div>
 

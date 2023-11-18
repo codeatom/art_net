@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import logo from "../../../images/logo.png";
 import avatar from "../../../images/avatar.png";
 import UserService from '../../../services/UserService';
-import UserPicUploadModal from '../modal/UserPicUploadModal';
+import UserFileUploadModal from '../modal/UserFileUploadModal';
 import DropDownMenu from './DropDownMenu';
 import EditProfileModal from '../modal/EditProfileModal';
 import DeleteProfilePicModal from '../modal/DeleteProfilePicModal';
@@ -71,8 +71,8 @@ const Header = (props) => {
 
     const openUploadModal = () => {
         setShowUploadModal(true);
-        setMenuOpen(false);
         setImageType();
+        setMenuOpen(false);
     }
 
     const closeUploadModal = () => {
@@ -165,8 +165,9 @@ const Header = (props) => {
             </div>
 
 
-            <UserPicUploadModal
+            <UserFileUploadModal
                 showUploadModal={showUploadModal}
+                isProfileImg={props.isProfileImg}
                 closeUploadModal={closeUploadModal}
                 uploadImage={props.uploadImage}
                 downloadURL={props.downloadURL}

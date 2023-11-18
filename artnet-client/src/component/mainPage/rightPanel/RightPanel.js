@@ -14,7 +14,7 @@ const RightPanel = (props) => {
     const userImage = useSelector((state) => state.user.userImage);
     const userName = useSelector((state) => state.user.userName)
     const [users, setUsers] = useState([]);
-    const [show, setShow] = useState(false);
+    const [showUploadModal, setShowUploadModal] = useState(false);
 
 
     useEffect(() => {
@@ -40,12 +40,17 @@ const RightPanel = (props) => {
         return userImage;
     }
 
+    const setImageType = () => {
+        props.setIsProfileImg(false);
+    };
+
     const openUploadModal = () => {
-        setShow(true);
+        setShowUploadModal(true);
+        setImageType();
     }
 
     const closeUploadModal = () => {
-        setShow(false);
+        setShowUploadModal(false);
     }
 
 
@@ -82,13 +87,14 @@ const RightPanel = (props) => {
             {/*upload modal*/}
             <div>
                 <UserFileUploadModal
-                    show={show}
+                    showUploadModal={showUploadModal}
+                    isProfileImg={props.isProfileImg}
                     closeUploadModal={closeUploadModal}
                     uploadImage={props.uploadImage}
                     downloadURL={props.downloadURL}
                     uploadToFirebase={props.uploadToFirebase}
-                    handlePostDescription={props.handlePostDescription}
-                    uploadProgress={props.uploadProgress} />
+                    uploadProgress={props.uploadProgress}
+                    handlePostDescription={props.handlePostDescription} />
             </div>
         </div >
     );
