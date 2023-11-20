@@ -147,6 +147,14 @@
     font-size: 12px;
 }
 
+.delete-icon {
+    position: relative;
+    width: 12px;
+    top: 10px;
+    left: 300px;
+    cursor: pointer;
+}
+
 .comment-text {
     width: 300px;
     margin-bottom: 20px;

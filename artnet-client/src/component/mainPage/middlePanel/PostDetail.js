@@ -93,7 +93,7 @@ const PostDetail = (props) => {
     return (
         <div>
             <div className='back-btn-div'>
-                <img className='back-btn-icon' src={backbutton} onClick={() => setIsPostDetail(dispatch, false)} />
+                <img className='back-btn-icon' title="Back" src={backbutton} onClick={() => setIsPostDetail(dispatch, false)} />
             </div>
 
             <div className='post-header'>
