@@ -91,48 +91,43 @@ const PostDetail = (props) => {
 
 
     return (
-        <div className='post-div'>
+        <div>
             <div className='back-btn-div'>
                 <img className='back-btn-icon' src={backbutton} onClick={() => setIsPostDetail(dispatch, false)} />
             </div>
 
-            <div>
+            <div className='post-header'>
                 <div>
-                    <div className='post-header'>
-                        <div>
-                            <img className='avatar post-detail-avatar-tweak' src={handleUserImg(props.postItem.user.userImage)} />
-                        </div>
-                        <div className='user-name txt user-name-tweak'>
-                            <div onClick={() => getAllByUserId()}>{props.postItem.user.userName}</div>
-                        </div>
-                        <div className='post-date post-date-tweak'>
-                            {props.postItem.postDate}
-                        </div>
-                    </div>
-                    <div className='post-description'>
-                        {props.postItem.description}
-                    </div>
-                    <div className='post-img-div'>
-                        <div>
-                            <img src={props.postItem.postImgURL} className='post-image' />
-                        </div>
-                        <div className='like-and-comment'>
-                            <div>
-                                <img src={textIcon} onClick={() => connectUserToChat(props.postItem.postId)} className='comment-symbol' />
-                            </div>
-                            <div className='like-and-comment-count'>
-                                {props.postItem.comments.length}
-                            </div>
-                            <div className='like-icon'><span>Like it</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                            <div onClick={() => setLikes(props.postItem.postId)}>
-                                <img src={likebutton} className='like-symbol' />
-                            </div>
-                            <div className='like-and-comment-count'>
-                                {props.postItem.likeArray.length}
-                            </div>
-                            <div className='txt-icon'><span>Reply</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                        </div>
-                    </div>
+                    <img className='avatar post-detail-avatar-tweak' src={handleUserImg(props.postItem.user.userImage)} />
+                </div>
+                <div className='user-name txt user-name-tweak'>
+                    <div onClick={() => getAllByUserId()}>{props.postItem.user.userName}</div>
+                </div>
+                <div className='post-date post-date-tweak'>
+                    {props.postItem.postDate}
+                </div>
+            </div>
+
+            <div className='col-10 post-description'>
+                {props.postItem.description}
+            </div>
+
+            <div>
+                <img src={props.postItem.postImgURL} className='post-image' />
+            </div>
+
+            <div className='like-and-comment'>
+                <div onClick={() => connectUserToChat(props.postItem.postId)}>
+                    <img src={textIcon} title="Reply" className='txt-icon' />
+                </div>
+                <div className='like-and-comment-count'>
+                    {props.postItem.comments.length}
+                </div>
+                <div onClick={() => setLikes(props.postItem.postId)}>
+                    <img src={likebutton} title="Like it" className='like-icon' />
+                </div>
+                <div className='like-and-comment-count'>
+                    {props.postItem.likeArray.length}
                 </div>
             </div>
 
@@ -142,17 +137,14 @@ const PostDetail = (props) => {
             {/*Chats*/}
             <Chat />
 
-            <div hidden={hideTextBox}>
-                <div className='comment-text-div'>
-                    <img className='avatar' src={handleUserImg(localUserImage)} alt='' />
-                    <div className='user-name txt' onClick={() => getAllByUserId()}>{localUserName}</div>
-                    <form onSubmit={postComment}>
-                        <input type='text' value={comment} onChange={handleComment} className='comment-text-box' placeholder="Write a comment" />
-                        <input type="submit" value=">>" className='btn' />
-                    </form>
-                </div>
+            <div className='comment-text-div' hidden={hideTextBox}>
+                <img className='avatar' src={handleUserImg(localUserImage)} alt='' />
+                <div className='user-name txt' onClick={() => getAllByUserId()}>{localUserName}</div>
+                <form onSubmit={postComment}>
+                    <input type='text' value={comment} onChange={handleComment} className='comment-text-box' placeholder="Write a comment" />
+                    <input type="submit" value=">>" className='btn' />
+                </form>
             </div>
-
             <div ref={chatRef} />
         </div>
     );

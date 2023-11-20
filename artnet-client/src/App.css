@@ -62,6 +62,10 @@
   cursor: pointer;
 }
 
+.edit-btn {
+  margin-left: 10px;
+}
+
 .h-line-left {
   border-bottom: 1px solid #e6ebee;
 }

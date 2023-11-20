@@ -13,7 +13,7 @@ const Chat = () => {
     }
 
     return (
-        <div className='comment-section'>
+        <div>
             {
                 chatArray != null ?
                     chatArray.map((item) => (
@@ -29,7 +29,7 @@ const Chat = () => {
                                     {item.commentDate}
                                 </div>
                             </div>
-                            <div className='posted-comment-text'>
+                            <div>
                                 {item.commentText}
                             </div>
                         </div>

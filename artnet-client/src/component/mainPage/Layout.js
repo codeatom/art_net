@@ -143,7 +143,7 @@ const Layout = () => {
                     <LeftPanel />
                 </div>
 
-                <div className="col-6 middle-side">{/* a column */}
+                <div className="col-6 middle-panel">{/* a column */}
                     <MiddlePanel />
                 </div>
 

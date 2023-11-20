@@ -11,7 +11,7 @@ const Comment = (props) => {
 
 
     return (
-        <div className='comment-section'>
+        <div>
             {
                 props.item.comments != null ?
                     props.item.comments.map((item) => (

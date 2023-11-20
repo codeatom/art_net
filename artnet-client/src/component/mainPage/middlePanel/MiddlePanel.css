@@ -1,3 +1,5 @@
+/* Post */
+
 .post-div {
     border-bottom: 1px solid #e6ebee;
 }
@@ -7,7 +9,22 @@
 }
 
 .post-avatar-padding {
+    margin-top: 10px;
     margin-left: 10px
+}
+
+.post-description {
+    margin-left: 50px;
+    margin-bottom: 20px;
+}
+
+.post-image-div {
+    margin-left: 55px;
+}
+
+.post-image {
+    width: 500px;
+    border-radius: 10px;
 }
 
 .like-and-comment {
@@ -15,29 +32,13 @@
     height: 35px;
     padding-top: 10px;
     padding-bottom: 50px;
-    padding-left: 60px;
+    margin-left: 70px;
 }
 
-.like-symbol {
-    height: 30px;
-    margin-left: 30px;
-    cursor: pointer;
-} 
-
-.comment-symbol {
+.txt-icon {
     width: 30px;
-    margin-left: 20px;
-}
-
-.post-img-div {
-    border-bottom: 1px solid #e6ebee;
-} 
-
-.post-image {
-    width: 500px;
-    border-radius: 10px;
-    margin-left: 20px;
-    margin-right: 10px;
+    cursor: pointer;
+    margin-left: 10px;
 }
 
 .like-and-comment-count {
@@ -46,13 +47,89 @@
     font-size: 14px;
 }
 
-.post-description {
-    margin-bottom: 20px;
+.like-icon {
+    width: 30px;
+    cursor: pointer;
+    margin-left: 50px;
+}
+
+.more-menu-div {
+    position: relative;
+    top: 20px;
+    height: 120px;
+    width: 90px;
+}
+
+.more-menu-bg-color {
+    background-color: white;
+}
+
+.more-btn {
+    width: 20px;
+    cursor: pointer;
+}
+
+.edit-delete-btn {
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.edit-delete-btn:hover {
+    color: red;
 }
 
 
 
-/* Comment */
+/* PostDetail */
+
+.back-btn-div {
+    position: absolute;
+    display: flex;
+    height: 50px;
+    width: 634px;
+    background-color: white;
+    opacity: 0.95;
+}
+
+.back-btn-icon {
+    width: 50px;
+}
+
+.post-detail-avatar-tweak {
+    margin-top: 70px;
+    margin-left: 10px;
+}
+
+.user-name-tweak {
+    margin-top: 75px;
+}
+
+.post-date-tweak {
+    margin-top: 78px;
+}
+
+.comment-text-div {
+    display: flex;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.comment-text-box {
+    height: 30px;
+    width: 300px;
+    border: 0px;
+    background-color: #EFF2F5;
+    border-radius: 30px;
+    font-size: 16px;
+    margin-left: 20px;
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+
+
+/* Comment, Chat */
 
 .all-comment {
     margin-left: 80px;
@@ -77,92 +154,13 @@
 
 
 
-/* PostDetail */
+/* EditOrDeletePostModal */
 
-.back-btn-div {
-    display: flex;
-    position: absolute;
-    background-color: #f8f9fb;
-    width: 634px;
-    height: 50px;
+.edit-text {
+    width: 265px;
 }
 
-.back-btn-icon {
-    width: 70px;
-    height: 40px;
-}
-
-.post-detail-avatar-tweak {
-    margin-top: 70px;
-    margin-left: 10px;
-}
-
-.user-name-tweak {
-    margin-top: 75px;
-}
-
-.post-date-tweak {
-    margin-top: 78px;
-}
-
-.post-description {
-    margin-bottom: 10px;
-}
-
-.comment-text-div {
-    display: flex;
-    padding: 10px;
+.post-to-delete {
     margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.comment-text-box {
-    height: 30px;
-    width: 300px;
-    border: 0px;
-    background-color: #EFF2F5;
-    border-radius: 30px;
-    font-size: 16px;
-    margin-left: 20px;
-    margin-top: 10px;
-    padding-left: 20px;
-}
-
-.txt-icon{  
-    position: relative;
-    color: white;
-    cursor: pointer;
-    font-size: 15px;
-    opacity: 0;
-    right: 215px;
-    bottom: -20px;
-    
-}
-
-.txt-icon span { 
-    background-color: rgb(159, 158, 158); 
-}
-
-.txt-icon:hover{
-    opacity: 1;
-    transition: 0.6s opacity;
-}
-
-.like-icon{  
-    position: relative;
-    color: white;
-    cursor: pointer;
-    font-size: 15px;
-    opacity: 0;
-    right: -55px;
-    bottom: -20px;
-}
-
-.like-icon span { 
-    background-color: rgb(159, 158, 158); 
-}
-
-.like-icon:hover{
-    opacity: 1;
-    transition: 0.6s opacity;
+    width: 265px;
 }
