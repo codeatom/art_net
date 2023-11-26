@@ -92,7 +92,7 @@ const Post = (props) => {
     const handleMoreBtn = (userId) => {
         const localUser = JSON.parse(localStorage.getItem("user"));
 
-        if (localUser.userId === userId) {
+        if (localUser.userId === userId && props.postItem.postId > 0) {
             return false;
         }
         else {
