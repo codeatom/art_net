@@ -23,6 +23,24 @@
     width: 35px;
 }
 
+.user-search-box{
+    border: 0px;
+    height: 35px;
+    width: 300px;
+    font-size: 16px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding-left: 20px;
+    border-radius: 20px; 
+    background-color: #EFF2F5; 
+}
+
+.right-panel-dropdown-menu {
+    height: 800px;  
+    overflow-y: scroll;
+    border-radius: 10px;
+}
+
 
 /*------UserImageLayout------*/
 
